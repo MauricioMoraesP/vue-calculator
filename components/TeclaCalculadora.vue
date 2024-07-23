@@ -2,12 +2,12 @@
     <div>
         <button @click="props.function(props.name)" v-if="props.name != 'vazio'"
             :class="{ 'tecla': props.name != '=', 'tecla-igual': props.name == '=' }"
-            class=" text-3xl rounded-2xl w-[80%] h-[1.8em] md:w-[85%] font-semibold md:h-[2.9em] z-50  text-center text-white font-gray-200 flex justify-center items-center border border-gray-900 shadow-lg   ">{{
+            class=" text-3xl rounded-2xl w-[80%] h-[2em] md:w-[85%] font-semibold md:h-[2.9em] z-50  text-center text-white font-gray-200 flex justify-center items-center border border-gray-900 shadow-lg   ">{{
                 props.name
             }}</button>
 
         <button v-if="props.image != 'vazio'" @click="props.function(props.image)"
-            class=" tecla text-3xl rounded-2xl w-[80%] h-[1.8em]  md:w-[85%] font-semibold md:h-[2.9em] z-50  text-center text-white font-gray-200 flex justify-center items-center border border-gray-900 shadow-lg">
+            class=" tecla text-3xl rounded-2xl w-[80%] h-[2em]  md:w-[85%] font-semibold md:h-[2.9em] z-50  text-center text-white font-gray-200 flex justify-center items-center border border-gray-900 shadow-lg">
             <slot />
         </button>
     </div>

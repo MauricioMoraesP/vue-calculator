@@ -88,7 +88,7 @@ onBeforeMount(() => {
 
     .calculadora-simples {
         margin-top: 20px;
-        height: 70%;
+        height: 71%;
         width: 400px;
         border-radius: 5%;
         background-color: rgba(0, 0, 0, 0.507);
