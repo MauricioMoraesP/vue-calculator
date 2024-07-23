@@ -2,11 +2,21 @@
     <header>
         <h2 class="text-2xl   text-center p-3 font-bold text-gray-700">Desafio Calculadora</h2>
     </header>
-    <main class="flex-1 flex flex-col md:justify-center items-center">
+    <main v-if="loading" class="flex-1 flex flex-col md:justify-center items-center">
         <slot />
+    </main>
+    <main v-if="!loading" class="flex-1 flex flex-col  justify-center items-center">
+        <SVGLoading />
     </main>
 </template>
 
+
+<script setup lang='ts'>
+const loading = ref<boolean>(false);
+onBeforeMount(() => {
+    loading.value = true;
+})
+</script>
 
 <style>
 .tecla-igual {

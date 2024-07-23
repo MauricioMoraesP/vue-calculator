@@ -1,11 +1,11 @@
 <template>
     <div class=" calculadora-simples h-[70%]">
-        <section class="tela flex flex-1 justify-center p-3 z-50 ">
+        <div class="tela flex flex-1 justify-center p-3 z-50 relative  ">
             <input v-model="input" @input="AnalisarTeclaInput($event as InputEvent)"
                 v-on:keyup.enter="TeclaCalculadoraResponsive('=')"
-                class="focus:border-white h-[130px] text-black border-4  text-end w-[94%]  my-8 text-4xl bg-white"
+                class="focus:border-white h-[130px] text-black border-4  text-end w-[94%]  my-8 text-4xl bg-white focus:ring-slate-600"
                 type="text">
-        </section>
+        </div>
         <div class="flex flex-1   items-end justify-center mt-2">
             <section
                 class="teclas grid grid-cols-4 ml-4 gap-1   w-full  place-items-center boder-none focus:border-none">
@@ -64,12 +64,12 @@ import { calculator, condicionamento } from '~/composable/operationCalculadora';
 const operador = ref<string>('');
 const input = ref<string>('');
 const regexVirgula = ref<RegExp>(/,/g);
-const regexUmPonto = ref<RegExp>(/\.{2}/g);
-const contadorPontos = ref<number>(0);
-const pointSave = ref<string>('');
 const valor1 = ref<string>('');
 const valor2 = ref<string>('');
 const seq = ref<boolean>(false);
+
+
+
 
 function TeclaCalculadoraResponsive(tecla: string) {
     switch (tecla) {
@@ -130,6 +130,9 @@ function TeclaCalculadoraResponsive(tecla: string) {
             operador.value = '/';
             condicionamento(valor1, valor2, input, seq, operador, calculator);
             break;
+        case '+/-':
+            input.value = String(Number(input.value) * -1);
+            break;
         case '√x':
             input.value = String(Math.sqrt(Number(input.value)));
             break;
@@ -157,9 +160,9 @@ function TeclaCalculadoraResponsive(tecla: string) {
         case '=':
             switch (operador.value) {
                 case "+":
-                    console.log(operador.value + '-' + valor1.value + '-' + valor2.value);
                     valor2.value = input.value;
                     input.value = String(Number(valor1.value) + Number(valor2.value));
+                    valor2.value = valor1.value;
                     valor1.value = input.value;
                     break;
                 case "-":
@@ -173,6 +176,7 @@ function TeclaCalculadoraResponsive(tecla: string) {
                     valor1.value = input.value;
                     break;
                 case "/":
+                    console.log(valor2.value, valor1.value, input.value);
                     valor2.value = input.value;
                     input.value = String(Number(valor1.value) / Number(valor2.value));
                     valor1.value = input.value;
@@ -187,7 +191,6 @@ function TeclaCalculadoraResponsive(tecla: string) {
 
 //Feito para observar as teclas dentro do Input.
 function AnalisarTeclaInput(evento: InputEvent) {
-    console.log(input.value, '-', valor1.value, '-', valor2.value);
     switch (evento.data) {
         case '+':
             operador.value = '+';
@@ -217,6 +220,13 @@ function AnalisarTeclaInput(evento: InputEvent) {
 //Observar a varíavel input
 watch(input, (newValue, oldValue) => {
     input.value = input.value.replace(regexVirgula.value, '.');
+    input.value = input.value.replace(/[^0-9()+\-*\/.]/g, '');
+    if (Number(input.value) > 20000000000) {
+        alert('Número excedeu, por isso foi necessário zerar a calculadora!')
+        input.value = '';
+        valor1.value = '';
+        valor2.value = '';
+    }
 });
 
 
