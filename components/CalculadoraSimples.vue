@@ -66,13 +66,14 @@ const input = ref<string>('');
 const regexVirgula = ref<RegExp>(/,/g);
 const valor1 = ref<string>('');
 const valor2 = ref<string>('');
+const passo = ref<string>('p1');
 const seq = ref<boolean>(false);
-
+const passoVerify = ref<boolean>(false);
 
 
 
 function TeclaCalculadoraResponsive(tecla: string) {
-    switch (tecla) {
+     switch (tecla) {
         case '1':
             input.value = input.value + '1';
             break;
@@ -116,7 +117,7 @@ function TeclaCalculadoraResponsive(tecla: string) {
             valor1.value = ''
             valor2.value = '';
             operador.value = '';
-            seq.value = false;
+            passo.value = 'p1'
             break;
         case '%':
             if (valor1.value != '') {
@@ -126,9 +127,12 @@ function TeclaCalculadoraResponsive(tecla: string) {
             }
             break;
         case '/':
-            input.value += '/';
+            passoVerify.value = false;
             operador.value = '/';
-            condicionamento(valor1, valor2, input, seq, operador, calculator);
+             if(passo.value=='p5' || passo.value=='p6'){
+                passo.value='p3'
+             }  
+            condicionamento(valor1, valor2, input, passo, operador, calculator);
             break;
         case '+/-':
             input.value = String(Number(input.value) * -1);
@@ -143,43 +147,84 @@ function TeclaCalculadoraResponsive(tecla: string) {
             input.value = String(1 / Number(input.value));
             break;
         case 'x':
-            input.value += '*';
             operador.value = '*';
-            condicionamento(valor1, valor2, input, seq, operador, calculator);
+            if(passo.value=='p5' || passo.value=='p6'){
+                passo.value='p3'
+             }  
+            condicionamento(valor1, valor2, input, passo, operador, calculator);
             break;
         case '+':
-            input.value += '+';
+            passoVerify.value = false;
             operador.value = '+';
-            condicionamento(valor1, valor2, input, seq, operador, calculator);
+            if(passo.value=='p5' || passo.value=='p6'){
+                passo.value='p3'
+             }  
+            condicionamento(valor1, valor2, input, passo, operador, calculator);
             break;
         case '-':
-            input.value += '-';
+            passoVerify.value = false;
             operador.value = '-';
-            condicionamento(valor1, valor2, input, seq, operador, calculator);
+            if(passo.value=='p5' || passo.value=='p6'){
+                passo.value='p3'
+             }  
+            condicionamento(valor1, valor2, input, passo, operador, calculator);
             break;
         case '=':
+            if (!passoVerify.value) {
+                passo.value = 'p5';
+            }
             switch (operador.value) {
                 case "+":
-                    valor2.value = input.value;
-                    input.value = String(Number(valor1.value) + Number(valor2.value));
-                    valor2.value = valor1.value;
-                    valor1.value = input.value;
+                    if (passo.value == 'p5') {
+                        console.log('p4');
+                        valor2.value = input.value;
+                        input.value = String(Number(valor1.value) + Number(valor2.value));
+                        valor1.value = input.value;
+                        passo.value = 'p6';
+                        passoVerify.value = true;
+                    } else {
+                        input.value = String(Number(valor1.value) + Number(valor2.value));
+                        valor1.value = input.value;
+                    }
                     break;
                 case "-":
-                    valor2.value = input.value;
-                    input.value = String(Number(valor1.value) - Number(valor2.value));
-                    valor1.value = input.value;
+                if (passo.value == 'p5') {
+                        console.log('p4');
+                        valor2.value = input.value;
+                        input.value = String(Number(valor1.value) - Number(valor2.value));
+                        valor1.value = input.value;
+                        passo.value = 'p6';
+                        passoVerify.value = true;
+                    } else {
+                        input.value = String(Number(valor1.value) - Number(valor2.value));
+                        valor1.value = input.value;
+                    }
                     break;
                 case "*":
-                    valor2.value = input.value;
-                    input.value = String(Number(valor1.value) * Number(valor2.value));
-                    valor1.value = input.value;
+                if (passo.value == 'p5') {
+                        console.log('p4');
+                        valor2.value = input.value;
+                        input.value = String(Number(valor1.value) * Number(valor2.value));
+                        valor1.value = input.value;
+                        passo.value = 'p6';
+                        passoVerify.value = true;
+                    } else {
+                        input.value = String(Number(valor1.value) * Number(valor2.value));
+                        valor1.value = input.value;
+                    }
                     break;
                 case "/":
-                    console.log(valor2.value, valor1.value, input.value);
-                    valor2.value = input.value;
-                    input.value = String(Number(valor1.value) / Number(valor2.value));
-                    valor1.value = input.value;
+                if (passo.value == 'p5') {
+                        console.log('p4');
+                        valor2.value = input.value;
+                        input.value = String(Number(valor1.value) / Number(valor2.value));
+                        valor1.value = input.value;
+                        passo.value = 'p6';
+                        passoVerify.value = true;
+                    } else {
+                        input.value = String(Number(valor1.value) / Number(valor2.value));
+                        valor1.value = input.value;
+                    }
                     break;
             }
             break;
@@ -194,19 +239,19 @@ function AnalisarTeclaInput(evento: InputEvent) {
     switch (evento.data) {
         case '+':
             operador.value = '+';
-            condicionamento(valor1, valor2, input, seq, operador, calculator);
+            condicionamento(valor1, valor2, input, passo, operador, calculator);
             break;
         case '-':
             operador.value = '-';
-            condicionamento(valor1, valor2, input, seq, operador, calculator);
+            condicionamento(valor1, valor2, input, passo, operador, calculator);
             break;
         case '/':
             operador.value = '/';
-            condicionamento(valor1, valor2, input, seq, operador, calculator);
+            condicionamento(valor1, valor2, input, passo, operador, calculator);
             break;
         case '*':
             operador.value = '*';
-            condicionamento(valor1, valor2, input, seq, operador, calculator);
+            condicionamento(valor1, valor2, input, passo, operador, calculator);
             break;
     }
 

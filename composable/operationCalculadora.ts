@@ -2,8 +2,7 @@ export function calculator(
   valor1: Ref<string>,
   valor2: Ref<string>,
   input: Ref<string>,
-  seq: Ref<boolean>,
-  operador: Ref<string>
+   operador: Ref<string>
 ) {
   let aux1 = Number(valor1.value);
   let aux2 = Number(valor2.value);
@@ -23,27 +22,40 @@ export function calculator(
   }
   valor2.value = "";
   valor1.value = input.value;
-  seq.value = true;
-}
+ }
 
 export function condicionamento(
   valor1: Ref<string>,
   valor2: Ref<string>,
   input: Ref<string>,
-  seq: Ref<boolean>,
+  passo: Ref<string>,
   operador: Ref<string>,
   functionCalculator: Function
 ) {
-  if (valor1.value == "") {
-    valor1.value = input.value.slice(0, -1);
-    input.value = "";
-  } else if (!seq.value) {
-    valor2.value = input.value.slice(0, -1);
-    input.value = "";
-    functionCalculator(valor1, valor2, input, seq, operador);
-  } else {
-    input.value = "";
-    valor2.value = "";
-    seq.value = false;
-  }
+  if(passo.value=='p1'){
+    console.log('entrou aqui!')
+    valor1.value= input.value;
+    input.value='';
+    passo.value='p2';
 }
+else if(passo.value=='p2'){
+  console.log('p2');
+    valor2.value=input.value;
+    functionCalculator(valor1, valor2, input, operador);   
+    valor1.value=input.value;
+    valor2.value='';
+    passo.value='p3'
+}
+else if(passo.value=='p3'){
+    input.value='';
+    passo.value='p4';
+}
+else if(passo.value=='p4'){
+    valor2.value=input.value;
+    functionCalculator(valor1, valor2, input, operador);   
+    valor1.value=input.value;
+    passo.value='p3';
+}
+}
+
+ 

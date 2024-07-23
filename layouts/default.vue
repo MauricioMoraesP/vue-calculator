@@ -2,7 +2,7 @@
     <header>
         <h2 class="text-2xl   text-center p-3 font-bold text-gray-700">Desafio Calculadora</h2>
     </header>
-    <main v-if="loading" class="flex-1 flex flex-col md:justify-center items-center">
+    <main v-if="loading" class="flex-1 flex flex-col justify-center items-center">
         <slot />
     </main>
     <main v-if="!loading" class="flex-1 flex flex-col  justify-center items-center">
@@ -33,7 +33,7 @@ onBeforeMount(() => {
     border-color: rgba(39, 38, 38, 0.658);
 }
 
-@media only screen and (min-width:1000px) {
+@media only screen and (min-width:767px) {
     #__nuxt {
         background-color: rgba(241, 239, 239, 0.87);
         display: flex;
@@ -55,7 +55,7 @@ onBeforeMount(() => {
 
 }
 
-@media only screen and (min-width:500px) {
+@media only screen and (max-width:768px) {
     #__nuxt {
         background-color: rgba(241, 239, 239, 0.87);
         display: flex;
@@ -65,8 +65,8 @@ onBeforeMount(() => {
     }
 
     .calculadora-simples {
-        width: 500px;
-        height: 800px;
+        height: 70%;
+        width: 400px;
         border-radius: 5%;
         box-shadow: 10%;
         border: 1px solid;
@@ -88,7 +88,7 @@ onBeforeMount(() => {
 
     .calculadora-simples {
         margin-top: 20px;
-        height: 95%;
+        height: 70%;
         width: 400px;
         border-radius: 5%;
         background-color: rgba(0, 0, 0, 0.507);
