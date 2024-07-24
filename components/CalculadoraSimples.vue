@@ -1,10 +1,13 @@
 <template>
     <div class=" calculadora-simples h-[70%]">
         <div class="tela flex flex-1 justify-center p-3 z-50 relative  ">
-            <input v-model="input" @input="AnalisarTeclaInput($event as InputEvent)"
+            <input ref="inputRef" v-model="input" @input="AnalisarTeclaInput($event as InputEvent)"
                 v-on:keyup.enter="TeclaCalculadoraResponsive('=')"
                 class="focus:border-white h-[100px]  md:h-[130px] text-black border-4  text-end w-[94%] text my-8 text-4xl bg-white focus:ring-slate-600"
                 type="text">
+            <button @click="copiar" class="absolute top-14 right-9 rounded-md shadow-md ">
+                <SVGCopiar />
+            </button>
         </div>
         <div class="flex flex-1   items-end justify-center mt-2">
             <section
@@ -61,13 +64,19 @@ const valor1 = ref<string>('');
 const valor2 = ref<string>('');
 const passo = ref<string>('p1');
 const passoVerify = ref<boolean>(false);
-
+const inputRef = ref<HTMLInputElement>();
 
 function TeclaCalculadoraResponsive(tecla: string) {
     actionTeclaResponsive(valor1, valor2, input, passo, operador, condicionamento, passoVerify, tecla);
 }
 function AnalisarTeclaInput(evento: InputEvent) {
     teclaInput(valor1, valor2, input, passo, operador, condicionamento, passoVerify, evento);
+}
+
+function copiar() {
+    if (input.value != '') {
+        navigator.clipboard.writeText(input.value);
+    }
 }
 
 watch(input, () => {
@@ -80,6 +89,7 @@ watch(input, () => {
         valor2.value = '';
     }
 });
+
 
 
 
