@@ -114,10 +114,9 @@ export function actionTeclaResponsive(
       break;
     case "%":
       if (valor1.value != "") {
-        input.value = (
-          (Number(valor1.value) * Number(input.value)) /
-          100
-        ).toFixed(2);
+        input.value = String(
+          (Number(valor1.value) * Number(input.value)) / 100
+        );
       } else {
         operador.value = "";
       }
@@ -186,16 +185,12 @@ export function actionTeclaResponsive(
         case "-":
           if (passo.value == "p5") {
             valor2.value = input.value;
-            input.value = String(
-              (Number(valor1.value) - Number(valor2.value)).toFixed(2)
-            );
+            input.value = String(Number(valor1.value) - Number(valor2.value));
             valor1.value = input.value;
             passo.value = "p6";
             passoVerify.value = true;
           } else {
-            input.value = String(
-              (Number(valor1.value) - Number(valor2.value)).toFixed(2)
-            );
+            input.value = String(Number(valor1.value) - Number(valor2.value));
             valor1.value = input.value;
           }
           break;
