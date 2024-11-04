@@ -1,75 +1,17 @@
-# Nuxt 3 Minimal Starter
+# Projeto de Calculadora Vue 3
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+## Descrição
 
-## Setup
+Esta é uma calculadora desenvolvida utilizando o framework Nuxt 3, baseado no Vue 3, com o objetivo de fornecer uma interface simples, intuitiva e responsiva para operações matemáticas básicas. O projeto foi elaborado para ser leve, rápido e acessível em diferentes dispositivos.
 
-Make sure to install the dependencies:
+## Tecnologias Utilizadas
 
-```bash
-# npm
-npm install
+- **Nuxt 3 (Vue 3)**: Utilizado como base do projeto para aproveitar suas capacidades de desenvolvimento otimizado e renderização.
+- **Tailwind CSS**: Usado para estilizar a interface, permitindo uma entrega mais ágil e responsiva.
 
-# pnpm
-pnpm install
+## Funcionalidades
 
-# yarn
-yarn install
+- **Operações Básicas**: A calculadora permite a realização de operações como adição, subtração, multiplicação e divisão.
+- **Responsividade**: Interface ajustada para diferentes tamanhos de tela, garantindo uma experiência consistente em dispositivos móveis e desktop.
 
-# bun
-bun install
-```
-
-## Development Server
-
-Start the development server on `http://localhost:3000`:
-
-```bash
-# npm
-npm run dev
-
-# pnpm
-pnpm run dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
-```
-
-## Production
-
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm run build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm run preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+ 
